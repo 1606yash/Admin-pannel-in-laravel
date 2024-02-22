@@ -1,0 +1,92 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::prefix('user')->group(function() {
+    Route::get('/', 'UserController@index');
+    Route::get('/create', 'UserController@create');
+    Route::post('/create', 'UserController@store');
+    Route::post('/bulk-update', 'UserController@bulkUpdate');
+    Route::get('/edit/{user_id}', 'UserController@edit');
+    Route::post('/edit/{user_id}', 'UserController@update');
+    Route::get('/delete/{user_id}', 'UserController@destroy');
+    Route::get('cities/{district_id}', 'UserController@cities');
+    Route::get('districts/{state_id}', 'UserController@districts');
+    Route::get('remove-image/{user_image}', 'UserController@removeImage');
+    Route::get('/import', 'UserController@import');
+<<<<<<< HEAD
+    
+=======
+    Route::get('/organization-list', 'UserController@organizationList');
+    Route::get('/organization-create', 'UserController@organizationCreate');
+    Route::get('/activity-logs', 'UserController@activityLogs');
+>>>>>>> dcac373cd23402c5fc411a027b72c8c3782f1ca8
+
+    Route::get('/detail/{user_id}', 'UserController@show');
+    Route::get('/address/{user_id}', 'UserController@address');
+    Route::get('/address-details/{address_id}', 'UserController@addressDetails');
+    Route::post('/address/{user_id}', 'UserController@addressUpdate');
+    Route::get('/address/remove/{address_id}', 'UserController@removeAddress');
+    Route::post('/check-user', 'UserController@checkUser');
+
+    Route::prefix('staff')->group(function() {
+        Route::get('/', 'UserController@staffList');
+        Route::get('/create-staff', 'UserController@createStaff');
+        Route::post('/create-staff', 'UserController@storeStaff');
+        Route::get('/edit-staff/{user_id}', 'UserController@editStaff');
+        Route::post('/edit-staff/{user_id}', 'UserController@updateStaff');
+        Route::get('/staff-detail/{user_id}', 'UserController@showStaff');
+        Route::get('/delete-staff/{user_id}', 'UserController@destroyStaff');
+        Route::post('/staff-bulk-update', 'UserController@staffBulkUpdate');
+    });
+
+
+    Route::get('/profile', 'UserController@profile');
+    Route::post('/profile', 'UserController@updateProfile');
+    Route::get('/profile/notification', 'UserController@notification');
+    Route::get('/profile/activity', 'UserController@activity');
+    Route::get('/profile/setting', 'UserController@setting');
+    Route::post('/profile/setting', 'UserController@updatePassword');
+    Route::get('/notification', 'UserController@notifications');
+
+    Route::get('/profile/address', 'UserController@profileAddress');
+    Route::post('/profile/address', 'UserController@updateProfileAddress');
+
+    Route::group(['prefix' => 'mapping'], function () {
+        Route::get('/', 'MappingController@index');
+        Route::get('/map-buyers/{sp_id}', 'MappingController@mapBuyers');
+        Route::post('/map-buyers/{sp_id}', 'MappingController@store');
+        Route::post('/unmap-buyers/{sp_id}', 'MappingController@unmapBuyers');
+    });
+    Route::group(['prefix' => 'roles'], function () {
+        Route::get('/', 'RoleController@index');
+        Route::get('/get-role', 'RoleController@getRole');
+        Route::get('/delete-role/{id}', 'RoleController@destroy');
+        Route::post('/add', 'RoleController@store');
+        //Route::get('/map', 'MappingController@map');
+    });
+    Route::group(['prefix' => 'permissions'], function () {
+
+        Route::get('/{role_id?}', 'PermissionsController@index');
+        Route::get('add', 'PermissionsController@create');
+        Route::post('add', 'PermissionsController@store');
+        Route::get('/{role_id}', 'PermissionsController@show');
+    });
+    Route::group(['prefix' => 'broadcast'], function () {
+        Route::get('/', 'BroadcastController@index');
+        Route::post('/add', 'BroadcastController@store');
+        Route::get('/table', 'BroadcastController@table');
+        Route::get('/resend/{id}', 'BroadcastController@resend');
+        Route::get('/delete', 'BroadcastController@destroy');
+        //Route::get('/map', 'MappingController@map');
+    });
+});

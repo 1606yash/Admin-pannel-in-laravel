@@ -1,0 +1,22 @@
+{
+    "Blog": true,
+    "User": true,
+    "Ecommerce": true,
+    "Administration": true,
+    "Dashboard": true,
+    "Cms": true,
+    "Saas": true,
+    "Report": true,
+    "Visit": true,
+    "Visits": true,
+    "Location": true,
+    "Master": true,
+    "Role": true,
+    "HumanResource": true,
+    "Driver": true,
+    "Attendance": true,
+    "Task": true,
+    "Expense": true,
+    "Employee": true,
+    "Ambulance": true
+}

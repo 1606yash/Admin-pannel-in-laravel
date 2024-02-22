@@ -1,0 +1,88 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.3|^8.0",
+        "apility/laravel-fcm": "^1.4",
+        "aws/aws-sdk-php": "^3.293",
+        "barryvdh/laravel-debugbar": "^3.7",
+        "barryvdh/laravel-dompdf": "0.9.0",
+        "benwilkins/laravel-fcm-notification": "^4.0",
+        "darkaonline/l5-swagger": "^8.0",
+        "fideloper/proxy": "^4.4",
+        "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^7.8",
+        "illuminate/mail": "^8.0",
+        "intervention/image": "^2.5",
+        "kreait/laravel-firebase": "^3.1",
+        "laravel/framework": "^8.12",
+        "laravel/passport": "^10.1",
+        "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.1",
+        "league/flysystem-aws-s3-v3": "*",
+        "league/fractal": "^0.19.2",
+        "maatwebsite/excel": "^3.1",
+        "nwidart/laravel-modules": "^8.2",
+        "owen-it/laravel-auditing": "^12.0",
+        "rmunate/spell-number": "^1.0",
+        "spatie/laravel-permission": "^3.18",
+        "twilio/sdk": "^7.12",
+        "yajra/laravel-datatables": "1.5",
+        "yajra/laravel-datatables-buttons": "^4.0"
+    },
+    "require-dev": {
+        "facade/ignition": "^2.5",
+        "fakerphp/faker": "^1.9.1",
+        "kitloong/laravel-migrations-generator": "^4.4",
+        "mockery/mockery": "^1.4.2",
+        "nunomaduro/collision": "^5.0",
+        "orangehill/iseed": "^3.0",
+        "phpunit/phpunit": "^9.3.3"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/",
+            "Modules\\": "Modules/"
+        },
+        "files": [
+            "app/Http/Helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    }
+}

@@ -1,0 +1,2247 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "L5 OpenApi",
+        "description": "L5 Swagger OpenApi description",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/parivaar/public/",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/api/v1/e-commerce/cart": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get cart",
+                "operationId": "cart",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "summary": "Add to cart",
+                "description": "Add to cart.",
+                "operationId": "storea",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "item_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "original_price": {
+                                        "type": "number",
+                                        "example": 1000
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "example": 1000
+                                    },
+                                    "quantity": {
+                                        "type": "number",
+                                        "example": 5
+                                    },
+                                    "sku_code": {
+                                        "type": "string",
+                                        "example": "ABCD12"
+                                    },
+                                    "retailer_id": {
+                                        "type": "number",
+                                        "example": 15
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/cart/create-cart": {
+            "post": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "summary": "Create cart",
+                "description": "Create a new cart.",
+                "operationId": "createCart",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "items": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "item_id": {
+                                                    "type": "number",
+                                                    "example": "1"
+                                                },
+                                                "original_price": {
+                                                    "type": "number",
+                                                    "example": 1000
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "example": 1000
+                                                },
+                                                "quantity": {
+                                                    "type": "number",
+                                                    "example": 5
+                                                },
+                                                "sku_code": {
+                                                    "type": "string",
+                                                    "example": "ABCD12"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/cart/remove-item": {
+            "post": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "summary": "Remove item from cart",
+                "description": "Remove item from cart.",
+                "operationId": "removeItem",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "cart_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "item_sku": {
+                                        "type": "string",
+                                        "example": "ABCD12"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/cart/item-quantity": {
+            "post": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "summary": "Update Item Qunatity",
+                "description": "Update Item Qunatity",
+                "operationId": "updateItemQunatity",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "cart_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "quantity": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "retailer_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "item_sku": {
+                                        "type": "string",
+                                        "example": "ABCD12"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/cart/clear-cart/{cart_id}": {
+            "delete": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "clear-cart",
+                "operationId": "clearCart",
+                "parameters": [
+                    {
+                        "name": "cart_id",
+                        "in": "path",
+                        "description": "cart_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/home/{retailer_id}": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get home page data",
+                "operationId": "index",
+                "parameters": [
+                    {
+                        "name": "retailer_id",
+                        "in": "path",
+                        "description": "retailer_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/home-settings": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "update home page setting",
+                "description": "API for SP and buyer mapping.",
+                "operationId": "updateHomeSettings",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "best_seller": {
+                                        "type": "number",
+                                        "example": 1
+                                    },
+                                    "featured_product": {
+                                        "type": "number",
+                                        "example": 1
+                                    },
+                                    "brands": {
+                                        "type": "number",
+                                        "example": 1
+                                    },
+                                    "models": {
+                                        "type": "number",
+                                        "example": 1
+                                    },
+                                    "recommended_products": {
+                                        "type": "number",
+                                        "example": 1
+                                    },
+                                    "new_arrivals": {
+                                        "type": "number",
+                                        "example": 1
+                                    },
+                                    "inventory": {
+                                        "type": "number",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/retailer-ledger/{retailer_id}": {
+            "get": {
+                "tags": [
+                    "Dashboard"
+                ],
+                "description": "API to get home page data",
+                "operationId": "retailerLedger",
+                "parameters": [
+                    {
+                        "name": "retailer_id",
+                        "in": "path",
+                        "description": "retailer_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/dashboard/{role}": {
+            "get": {
+                "tags": [
+                    "Dashboard"
+                ],
+                "description": "API to get home page data",
+                "operationId": "dashboard",
+                "parameters": [
+                    {
+                        "name": "role",
+                        "in": "path",
+                        "description": "role",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "BUYER"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/summary/{role}": {
+            "get": {
+                "tags": [
+                    "Dashboard"
+                ],
+                "description": "API to get home page data",
+                "operationId": "summary",
+                "parameters": [
+                    {
+                        "name": "role",
+                        "in": "path",
+                        "description": "role",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "BUYER"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/seller-overall-summary": {
+            "get": {
+                "tags": [
+                    "Dashboard"
+                ],
+                "description": "API to get home page data",
+                "operationId": "overallSummary",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/banners": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get home page data",
+                "operationId": "banners",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/master/banks": {
+            "get": {
+                "tags": [
+                    "Master"
+                ],
+                "description": "API to get banks",
+                "operationId": "banks",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/master/states": {
+            "get": {
+                "tags": [
+                    "Master"
+                ],
+                "description": "API to get states",
+                "operationId": "states",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/master/districts/{stateId}": {
+            "get": {
+                "tags": [
+                    "Master"
+                ],
+                "description": "API to get districts",
+                "operationId": "districts",
+                "parameters": [
+                    {
+                        "name": "stateId",
+                        "in": "path",
+                        "description": "stateId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/master/cities/{districtId}": {
+            "get": {
+                "tags": [
+                    "Master"
+                ],
+                "description": "API to get cities",
+                "operationId": "cities",
+                "parameters": [
+                    {
+                        "name": "districtId",
+                        "in": "path",
+                        "description": "districtId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/master/buyer-categories": {
+            "get": {
+                "tags": [
+                    "Master"
+                ],
+                "description": "API to get buyer-categories",
+                "operationId": "buyer-categories",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/orders/my-orders": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get my orders",
+                "operationId": "myOrders",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/order/{order_id}": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get order details by id",
+                "operationId": "show",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/orders/all-orders": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get all orders",
+                "operationId": "allOrders",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/orders/retailer-orders/{retailer_id}": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get retailer orders",
+                "operationId": "retailerOrders",
+                "parameters": [
+                    {
+                        "name": "retailer_id",
+                        "in": "path",
+                        "description": "retailer_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/orders/dsp-orders/{dsp_id}": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get dsp orders",
+                "operationId": "dspOrders",
+                "parameters": [
+                    {
+                        "name": "dsp_id",
+                        "in": "path",
+                        "description": "dsp_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/checkout/order-submit": {
+            "post": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "summary": "Api to place order",
+                "description": "Api to place order.",
+                "operationId": "orderSubmit",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "amount": {
+                                        "type": "number",
+                                        "example": 500
+                                    },
+                                    "currency": {
+                                        "type": "string",
+                                        "example": "INR"
+                                    },
+                                    "retailer_id": {
+                                        "type": "number",
+                                        "example": 51
+                                    },
+                                    "shipping_address": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John"
+                                            },
+                                            "address1": {
+                                                "type": "string",
+                                                "example": "Wall street"
+                                            },
+                                            "address2": {
+                                                "type": "string",
+                                                "example": "ATM"
+                                            },
+                                            "country": {
+                                                "type": "string",
+                                                "example": "India"
+                                            },
+                                            "state_id": {
+                                                "type": "number",
+                                                "example": "1"
+                                            },
+                                            "district_id": {
+                                                "type": "number",
+                                                "example": 1000
+                                            },
+                                            "city_id": {
+                                                "type": "number",
+                                                "example": 1000
+                                            },
+                                            "pincode": {
+                                                "type": "number",
+                                                "example": 452001
+                                            },
+                                            "state": {
+                                                "type": "string",
+                                                "example": "Delhi"
+                                            },
+                                            "city": {
+                                                "type": "string",
+                                                "example": "Delhi"
+                                            },
+                                            "district": {
+                                                "type": "string",
+                                                "example": "Delhi"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "billing_address": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John"
+                                            },
+                                            "address1": {
+                                                "type": "string",
+                                                "example": "Wall street"
+                                            },
+                                            "address2": {
+                                                "type": "string",
+                                                "example": "ATM"
+                                            },
+                                            "country": {
+                                                "type": "string",
+                                                "example": "India"
+                                            },
+                                            "state_id": {
+                                                "type": "number",
+                                                "example": "1"
+                                            },
+                                            "district_id": {
+                                                "type": "number",
+                                                "example": 1000
+                                            },
+                                            "city_id": {
+                                                "type": "number",
+                                                "example": 1000
+                                            },
+                                            "pincode": {
+                                                "type": "number",
+                                                "example": 452001
+                                            },
+                                            "state": {
+                                                "type": "string",
+                                                "example": "Delhi"
+                                            },
+                                            "city": {
+                                                "type": "string",
+                                                "example": "Delhi"
+                                            },
+                                            "district": {
+                                                "type": "string",
+                                                "example": "Delhi"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "order_items": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "item_id": {
+                                                    "type": "number",
+                                                    "example": "1"
+                                                },
+                                                "amount": {
+                                                    "type": "number",
+                                                    "example": 1000
+                                                },
+                                                "quantity": {
+                                                    "type": "number",
+                                                    "example": 5
+                                                },
+                                                "sku_code": {
+                                                    "type": "string",
+                                                    "example": "ABCD12"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/orders/order-status": {
+            "post": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "summary": "Update order status",
+                "description": "Update order status.",
+                "operationId": "updateOrderStatus",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "order_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "Completed"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/shop/products-list": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get products-list",
+                "operationId": "products-list",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/shop/single-product/{productId}": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get single-product",
+                "operationId": "single-product",
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "description": "productId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/shop/frequently-ordered-items": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get frequently-ordered-items",
+                "operationId": "frequently-ordered-items",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/ratings": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Add Review",
+                "description": "This api will add product review and rating",
+                "operationId": "storeaa",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "rating": {
+                                        "type": "number",
+                                        "example": 3
+                                    },
+                                    "product_id": {
+                                        "type": "number",
+                                        "example": 3
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Good"
+                                    },
+                                    "body": {
+                                        "type": "string",
+                                        "example": "lorem ipsum lorem ipsum lorem ipsum"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/categories": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get categories",
+                "operationId": "categories",
+                "parameters": [
+                    {
+                        "name": "pagniation",
+                        "in": "path",
+                        "description": "pagniation",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "no"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/sub-categories/{parent_id}": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get sub-categories",
+                "operationId": "sub-categories",
+                "parameters": [
+                    {
+                        "name": "parent_id",
+                        "in": "path",
+                        "description": "parent_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/brands": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get brands",
+                "operationId": "brands",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/segments": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get segments",
+                "operationId": "segments",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/models": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get models",
+                "operationId": "models",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/manufacturers": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get manufacturers",
+                "operationId": "manufacturers",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/tags": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get tags",
+                "operationId": "tags",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/favourite/{productId}": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to add favourite",
+                "operationId": "favouritess",
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "description": "productId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to remove product from favourite",
+                "operationId": "favourite",
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "description": "productId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/my-favourite": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to get my-favourite",
+                "operationId": "my-favourite",
+                "parameters": [
+                    {
+                        "name": "retailer_id",
+                        "in": "path",
+                        "description": "retailer_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/e-commerce/targets/{user_id}": {
+            "get": {
+                "tags": [
+                    "Ecommerce"
+                ],
+                "description": "API to targets",
+                "operationId": "target",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "user_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/addresses": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "API to get addresses of user",
+                "operationId": "indexad",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create address",
+                "description": "This api will create new address.",
+                "operationId": "storeaaa",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "address_type": {
+                                        "type": "number",
+                                        "example": "1:Billing,2:Shipping"
+                                    },
+                                    "is_default": {
+                                        "type": "number",
+                                        "example": 1
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John wick"
+                                    },
+                                    "address1": {
+                                        "type": "string",
+                                        "example": "Wall Street 1"
+                                    },
+                                    "address2": {
+                                        "type": "string",
+                                        "example": "Near ATM"
+                                    },
+                                    "country": {
+                                        "type": "number",
+                                        "example": 103
+                                    },
+                                    "state": {
+                                        "type": "number",
+                                        "example": 21
+                                    },
+                                    "district": {
+                                        "type": "number",
+                                        "example": 21
+                                    },
+                                    "city": {
+                                        "type": "number",
+                                        "example": 21
+                                    },
+                                    "pincode": {
+                                        "type": "number",
+                                        "example": 741258
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/addresses/{address_id}": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update address",
+                "description": "This api will update address.",
+                "operationId": "updatead",
+                "parameters": [
+                    {
+                        "name": "address_id",
+                        "in": "path",
+                        "description": "Id of address",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "address_type": {
+                                        "type": "number",
+                                        "example": "1:Billing,2:Shipping"
+                                    },
+                                    "is_default": {
+                                        "type": "number",
+                                        "example": 1
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John wick"
+                                    },
+                                    "address1": {
+                                        "type": "string",
+                                        "example": "Wall Street 1"
+                                    },
+                                    "address2": {
+                                        "type": "string",
+                                        "example": "Near ATM"
+                                    },
+                                    "country": {
+                                        "type": "number",
+                                        "example": 103
+                                    },
+                                    "state": {
+                                        "type": "number",
+                                        "example": 21
+                                    },
+                                    "district": {
+                                        "type": "number",
+                                        "example": 21
+                                    },
+                                    "city": {
+                                        "type": "number",
+                                        "example": 21
+                                    },
+                                    "pincode": {
+                                        "type": "number",
+                                        "example": 741258
+                                    },
+                                    "status": {
+                                        "type": "number",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete address",
+                "description": "This api will delete address.",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "address_id",
+                        "in": "path",
+                        "description": "Id of address",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/users/{id}/address": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "API to get addresses by user id",
+                "operationId": "userAddresses",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "id of the user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "api for user login",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "username": {
+                                        "type": "integer"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "username": "9999999999",
+                                    "password": "123456"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/password/forget-password": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Forget Password",
+                "description": "This api takes appUrl & email and send password reset link over email.",
+                "operationId": "create",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "appUrl": {
+                                        "type": "string",
+                                        "example": "https://app-in-staging-snapvatme.azurewebsites.net/"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "farhan@mailinator.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/v1/password/reset": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Reset Password",
+                "description": "This api resets the password.",
+                "operationId": "reset",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "password": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "token": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/v1/changePassword": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Change Password",
+                "description": "This api Changes the existing password.",
+                "operationId": "changePassword",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "newPassword": {
+                                        "type": "string",
+                                        "example": "Demo@123"
+                                    },
+                                    "oldPassword": {
+                                        "type": "string",
+                                        "example": "Test@123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user-organizations": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "API to get assigned organzation to user",
+                "operationId": "user-organizations",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/update-user-organization": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "update-user-organization",
+                "description": "This api will updates user organization.",
+                "operationId": "update",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "organization_id": {
+                                        "type": "number",
+                                        "example": 16
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/me": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "API to get organzation,user,settings info",
+                "operationId": "organizationUserInformation",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/users-by-type/{user_type}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "API to get users by type",
+                "operationId": "getUsersByType",
+                "parameters": [
+                    {
+                        "name": "user_type",
+                        "in": "path",
+                        "description": "user_type",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/map-retailers": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "SP-Buyer Mapping",
+                "description": "API for SP and buyer mapping.",
+                "operationId": "storeRetailers",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "dsp": {
+                                        "type": "number",
+                                        "example": 16
+                                    },
+                                    "retailers": {
+                                        "type": "string",
+                                        "example": "10,11,12"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/dsp-retailers/{dsp}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "API to get dsp buyers",
+                "operationId": "getDspRetailers",
+                "parameters": [
+                    {
+                        "name": "dsp",
+                        "in": "path",
+                        "description": "dsp",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user-details/{user_id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "API to get user details",
+                "operationId": "userDetails",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "user_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/distributor-details": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "API to get seller details",
+                "operationId": "distributorDetails",
+                "responses": {
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/contact": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "contact us",
+                "description": "API for contact us.",
+                "operationId": "contact",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "John@gmail.com"
+                                    },
+                                    "phone": {
+                                        "type": "number",
+                                        "example": 7412580369
+                                    },
+                                    "company": {
+                                        "type": "string",
+                                        "example": "SIPL"
+                                    },
+                                    "subject": {
+                                        "type": "string",
+                                        "example": "Test"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "lorem lorem lorem lorem "
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/my-profile": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "my-profile",
+                "description": "API to update my profile.",
+                "operationId": "myProfile",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Snow"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user-status": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "user-status",
+                "description": "This api will updates user status of the organization team.",
+                "operationId": "updateUserStatus",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "number",
+                                        "example": 16
+                                    },
+                                    "status": {
+                                        "type": "number",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/update-fcm-token": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "update-fcm-token",
+                "description": "This api will update fcm token of user.",
+                "operationId": "updateFcmToken",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "fcmToken": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "register",
+                "description": "This api for buyer registration.",
+                "operationId": "register",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/assign-buyer-organiztion": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "assign-buyer-organiztion",
+                "description": "This api will assign user organization.",
+                "operationId": "assignBuyerOrganization",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "organization_id": {
+                                        "type": "number",
+                                        "example": 16
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/": {
+            "get": {
+                "description": "Home page",
+                "operationId": "49ac17593e60f5358b8c8e81c3298e97",
+                "responses": {
+                    "default": {
+                        "description": "Welcome page"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

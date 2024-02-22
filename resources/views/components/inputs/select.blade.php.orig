@@ -1,0 +1,33 @@
+@props([
+'for' => '',
+'label' => '',
+'value' => '',
+'name' => '',
+'formNote' => '',
+'required' =>'false',
+<<<<<<< HEAD
+'class' =>'',
+=======
+'multiple'=>'false',
+'placeholder'=>''
+
+>>>>>>> 639135b5aba633df7fd6cdf00bbb45aa3fbd9c21
+])
+<div class="form-group"> 
+    @if ($label != '')
+        <label class="form-label" for="{{ $for }}">{{ $label }}@if($required != '')<span class="text-danger">*</span>@endif</label>
+    @endif
+    <div class="form-control-wrap">
+<<<<<<< HEAD
+        <select class="form-select {{ $class }}" value="{{ $value }}"  name="{{ $name }}" data-parent=".toggle-slide" required="{{$required}}" data-parsley-errors-container=".parsley-container-{{ $name }}" id="{{$for}}">
+=======
+        <select class="form-select" value="{{ $value }}"  name="{{ $name }}" data-parent=".toggle-slide" required="{{$required}}" data-parsley-errors-container=".parsley-container-{{ $name }}" id="{{$for}}" @if ($multiple == 'true') multiple="" @endif data-placeholder="{{ $placeholder }}">
+>>>>>>> 639135b5aba633df7fd6cdf00bbb45aa3fbd9c21
+            {{ $slot }}
+        </select>
+    </div>
+    @if ($formNote != '')
+        <span class="form-note mt-0">{{ $formNote }}</span>
+    @endif
+    <div class="parsley-container-{{ $name }}"></div>
+</div>

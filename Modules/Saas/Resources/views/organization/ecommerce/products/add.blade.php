@@ -1,0 +1,599 @@
+
+@push('headerScripts')
+    <link rel="stylesheet" href="{{url('css/editor/summernote.css?ver=1.9.0')}}">
+@endpush
+@extends('layouts.app')
+
+@section('content')
+    @php
+        if(isset($product)){
+            $action = url('saas/organization/ecommerce/products/edit/'.$product->id);
+        }else{
+            $action = url('saas/organization/ecommerce/products/create');
+        }
+    @endphp
+
+    <form role="form" method="post" action="{{ $action }}" enctype="multipart/form-data">
+    @csrf
+        <div class="nk-block-head nk-block-head-sm">
+            <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                    <h3 class="nk-block-title page-title"><a href="javascript:history.back()" class="pt-3"><em class="icon ni ni-chevron-left back-icon"></em> </a> @if (isset($product)) Edit @else Add @endif Product</h3>
+                </div><!-- .nk-block-head-content -->
+            </div><!-- .nk-block-between -->
+        </div><!-- .nk-block-head -->
+        <div class="nk-block">
+            <div class="card card-bordered sp-plan">
+                <div class="row no-gutters">
+                    <div class="col-md-3">
+                        <div class="sp-plan-action card-inner">
+                            <div class="icon">
+                                <em class="icon ni ni-box fs-36px o-5"></em>
+                                <h5 class="o-5">Basic</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="sp-plan-info card-inner">
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Product Name" for="productName" suggestion="Specify the product name." required="true" />
+                                </div>
+                                <div class="col-lg-7">
+                                    <x-inputs.text value="{{ isset($product) ? $product->name : old('name') }}"  for="productName" icon="box" required="true" placeholder="Product Name" minlength="3" maxlength="255" id="proName" name="name" autocomplete="off"/>
+                                </div>
+
+                            </div>
+                            <div class="titleParsley"></div>
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Slug" for="Slug" suggestion="Specify the slug of the product." />
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <div class="form-icon form-icon-left">
+                                                <em class="icon ni ni-ticket"></em>
+                                            </div>
+                                            <input type="text" data-parsley-errors-container=".slugParsley"  class="form-control" placeholder="Slug" name="slug" minlength="3" autocomplete="off" value="{{ isset($product) ? $product->slug : old('slug') }}" >
+                                            <div class="slugParsley" ></div>
+                                        </div>
+                                        <span class="form-note mt-0">Slug will be filled automatically if left blank</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="SKU Code" for="SKUCode" suggestion="Specify the SKU code of the product." required="true" />
+                                </div>
+                                <div class="col-lg-7">
+                                    <x-inputs.text value="{{ isset($product) ? $product->code : old('sku') }}" for="SKUCode" icon="view-col-fill" label="" placeholder="SKU" name="sku" minlength="3" maxlength="20" autocomplete="off" required="true"/>
+                                </div>
+                            </div>
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="MOQ" for="MOQ" suggestion="Specify the minimum order quantity." required="true" />
+                                </div>
+                                <div class="col-lg-7">
+                                    <input type="number" max="1000" min="1" icon="cart" data-parsley-errors-container=".moqParsley"  class="form-control" placeholder="MOQ" name="moq" required value="{{ isset($product) ? $product->moq : old('moq') }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .nk-block -->
+        <div class="nk-block">
+            <div class="card card-bordered sp-plan">
+                <div class="row no-gutters">
+                    <div class="col-md-3">
+                        <div class="sp-plan-action card-inner">
+                            <div class="icon">
+                                <em class="icon ni ni-box fs-36px o-5"></em>
+                                <h5 class="o-5">Product <br> Settings</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="sp-plan-info card-inner">
+                            
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Is Active" for="isActive" suggestion="Select the status of the product." />
+                                </div>
+                                <div class="col-lg-7">
+
+                                    @php
+                                        if(isset($product) && $product->status == 'active'){
+                                            $checked = 'true';
+                                        }else{
+                                            $checked = '';
+                                        }
+                                    @endphp
+
+                                    <x-inputs.switch for="isActive" size="md" label="" value="active" name="status"  checked={{$checked}}/>
+                                </div>
+                            </div>
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Is Featured" for="isFeatured" suggestion="Select the featured of the product." />
+                                </div>
+                                <div class="col-lg-7">
+                                    @php
+                                        if(isset($product) && $product->is_featured){
+                                            $checked = 'true';
+                                        }else{
+                                            $checked = '';
+                                        }
+                                    @endphp
+                                    <x-inputs.switch for="isFeatured" size="md" label="" value="1" name="is_featured"  checked={{$checked}}/>
+                                </div>
+                            </div>
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="To be Promoted" for="toBepromoted" suggestion="Select the to be promoted of the product." />
+                                </div>
+                                <div class="col-lg-7">
+                                    @php
+                                        if(isset($product) && $product->is_to_be_promoted){
+                                            $checked = 'true';
+                                        }else{
+                                            $checked = '';
+                                        }
+                                    @endphp
+                                    <x-inputs.switch for="toBepromoted" size="md" label="" value="1" label="" name="is_to_be_promoted" checked={{$checked}}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .nk-block -->
+        <div class="nk-block">
+            <div class="card card-bordered sp-plan">
+                <div class="row no-gutters">
+                    <div class="col-md-3">
+                        <div class="sp-plan-action card-inner">
+                            <div class="icon">
+                                <em class="icon ni ni-box fs-36px o-5"></em>
+                                <h5 class="o-5">Categories, <br> Brand  and <br> Model</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="sp-plan-info card-inner">
+                            <div class="row g-3 align-center">
+
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Categories" for="categories" suggestion="Select the product categories." required="true" />
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <select class="form-select" multiple="" data-placeholder="Select Categories" data-parsley-errors-container=".proCatParsley" name="categories[]" required="">
+                                            <option></option>
+                                            @forelse($categories as $key  => $cat)
+                                            <option 
+                                            @if(isset($product) && $product->category_id == $cat->id)
+                                            selected
+                                            @endif
+                                            value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                            @empty
+                                                <option></option>
+                                            @endforelse
+                                        </select>
+                                        </div>
+                                        <div class="proCatParsley"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Brand" for="productbrand" suggestion="Select the brand of the product." required="true" />
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <select class="form-select" data-placeholder="Select Brand" data-parsley-errors-container=".proBrandParsley" name="brands[]" required="">
+                                            <option></option>
+                                            @forelse($brands as $key  => $brand)
+                                            <option @if(isset($product) && $product->brand_id == $brand->id)
+                                            selected
+                                            @endif
+                                            value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                            @empty
+                                                <option></option>
+                                            @endforelse
+                                        </select>
+                                        
+                                        </div>
+                                        <div class="proBrandParsley"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Manufacturer" for="manufacturer" suggestion="Select the model of the manufacturer." required="true"/>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <select class="form-select" data-search="on" data-placeholder="Select Manufacturer" data-parsley-errors-container=".proMlParsley" name="manufacturer" required="" onchange="getModels(this.options[this.selectedIndex].value)" id="manufacturer">
+                                            <option></option>
+                                            @forelse($manufacturers as $key  => $m)
+                                            <option 
+                                            @if(isset($product) && $product->manufacturer_id==$m->id) selected @endif
+                                            value="{{ $m->id }}">{{ $m->name }}</option>
+                                            @empty
+                                                <option></option>
+                                            @endforelse
+                                        </select>
+                                        </div>
+                                        <div class="proMlParsley"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Model" for="Model" suggestion="Select the Model of the product." required="true" />
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="form-control-wrap">
+
+                                        @php
+                                            if(isset($product) && $product->models != ""){
+                                                $models = explode(',', $product->models);
+                                                $models = json_encode($models);
+                                            }else{
+                                                $models = "";
+                                            }
+                                        @endphp
+
+                                        <input type="hidden" value="{{ $models }}" id="allModels" name="">
+
+                                        <select class="form-select form-control form-control-lg" data-search="on" data-parsley-errors-container=".parsley-container-Model" name="models[]" id="model" required>
+                                            <option value="">Select Model</option>
+                                        </select>
+                                    </div>
+                                    <div class="parsley-container-Model"></div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .nk-block -->
+        <div class="nk-block">
+            <div class="card card-bordered sp-plan">
+                <div class="row no-gutters">
+                    <div class="col-md-3">
+                        <div class="sp-plan-action card-inner">
+                            <div class="icon">
+                                <em class="icon ni ni-box fs-36px o-5"></em>
+                                <h5 class="o-5">Inventory</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="sp-plan-info card-inner">
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Inventory" for="inventory" suggestion="Specify the inventory of the product." required="true" />
+                                </div>
+                                <div class="col-lg-7">
+                                    <select class="form-select" data-parsley-errors-container=".inventoryParsley" data-placeholder="Select Inventory"  required="true" name="inventory">
+                                            <option value="finite">Finite</option>
+                                    </select>
+                                </div>
+                                <div class="inventoryParsley"></div>
+                            </div>
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Inventory Value" for="inventoryValue" suggestion="Specify the inventory value of the product." />
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <div class="form-icon form-icon-left">
+                                                <em class="icon ni ni-box"></em>
+                                            </div>
+                                             <input type="text" class="form-control"  readonly="" name="inventory_value" value="{{ isset($product) ? $product->inventory_value : '1' }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .nk-block -->
+        <div class="nk-block">
+            <div class="card card-bordered sp-plan">
+                <div class="row no-gutters">
+                    <div class="col-md-3">
+                        <div class="sp-plan-action card-inner">
+                            <div class="icon">
+                                <em class="icon ni ni-box fs-36px o-5"></em>
+                                <h5 class="o-5">Price <br> Information</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="sp-plan-info card-inner">
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Regular Price" for="regularPrice" suggestion="Specify the regular price of the product." required="true" />
+                                </div>
+                                <div class="col-lg-7">
+                                    <input type="number" step="0.01" maxlength="6" min="1" type="text" class="form-control" placeholder="Regular Price" required data-parsley-errors-container=".regularPriceParsley" name="regular_price" id="regular_price" value="{{ isset($product) ? $product->regular_price : old('regular_price') }}">
+                                    <div class="regularPriceParsley"></div>
+                                </div>
+                            </div>
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Sale Price" for="salePrice" suggestion="Specify the sale price of the product." required="true" />
+                                </div>
+                                <div class="col-lg-7">
+                                     <input type="number" step="0.01" maxlength="6" min="1" type="text" class="form-control" data-parsley-errors-container=".salePriceParsley" required="true" placeholder="Sale Price" name="sale_price" id="sale_price" value="{{ isset($product) ? $product->sale_price : old('sale_price') }}">  
+                                     <div class="salePriceParsley"></div>
+                                </div>
+                            </div>
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <x-inputs.verticalFormLabel label="Discount" for="discount" suggestion="See the discount on the product" />
+                                </div>
+
+
+                                @php
+                                    if(isset($product) && $product->regular_price > $product->sale_price){
+                                        $percent = (($product->regular_price - $product->sale_price)*100) /$product->regular_price;
+                                        $percent = number_format((float) $percent, 2, '.', '');
+                                    }
+                                    else{
+                                        $percent = number_format((float) 0, 2, '.', '');
+                                    }
+                                @endphp
+
+                                <div class="col-lg-7">
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control"  value="{{ $percent }}" name="discount"  id="discount" readonly=""> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .nk-block -->
+        <div class="nk-block">
+            <div class="card card-bordered sp-plan">
+                <div class="row no-gutters">
+                    <div class="col-md-3">
+                        <div class="sp-plan-action card-inner">
+                            <div class="icon">
+                                <em class="icon ni ni-box fs-36px o-5"></em>
+                                <h5 class="o-5">Description</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="sp-plan-info card-inner">
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-12">
+                                    <x-inputs.verticalFormLabel label="Description" for="description" suggestion="Specify the description of the product." />
+                                    <x-inputs.textarea value="{{ isset($product) ? $product->description : old('description') }}" for="description" maxlength="500" name="description" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .nk-block -->
+
+
+        @php
+            if(isset($media)){
+                $mainImg='';
+                $img1='';
+                $imgArr=array();
+                foreach($media as $file){
+                    if($file->type == 1){
+                        $mainImg = $imgUrl.$file->file;
+                    }
+
+                    if($file->type == 2){
+
+                        $imgArr[] = $imgUrl.$file->file;
+
+                        // if($img1 != ""){
+                        //     $img3 = $imgUrl.$file->file;
+                        // }else{
+                        //     $img1 = $imgUrl.$file->file;
+                        // }
+                    }
+
+                }
+            }
+        @endphp
+
+        <div class="nk-block">
+            <div class="card card-bordered sp-plan">
+                <div class="row no-gutters">
+                    <div class="col-md-3">
+                        <div class="sp-plan-action card-inner">
+                            <div class="icon">
+                                <em class="icon ni ni-box fs-36px o-5"></em>
+                                <h5 class="o-5">Product <br> Images</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="sp-plan-info card-inner">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th class="text-center">Image</th>
+                                        <th>Upload</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+
+                                        @isset($product)
+                                        <td>Main Product Image<span class="text-danger">*</span></td>
+                                        <td class="text-center"><img src="{{ $mainImg }}" width="50px" alt="" class="thumb"></td>
+                                        @endisset
+
+                                        <td>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="customFile" name="main_image" @if(!isset($product))  required="" @endif>
+                                                <label class="custom-file-label" for="mainProductImage">Choose file</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        @isset ($product)
+                                            <td>Product Image 1</td>
+                                            <td class="text-center"><img src="@isset($imgArr[0]) {{ $imgArr[0] }} @endisset" width="50px" alt="" class="thumb"></td>
+                                        @endisset
+
+                                        <td>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="customFile1" name="product_image_1">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        @isset ($product)
+                                            <td>Product Image 2</td>
+                                            <td class="text-center"><img src="@isset($imgArr[1]) {{ $imgArr[1] }} @endisset" width="50px" alt="" class="thumb"></td>
+                                        @endisset
+                                        <td>
+                                            <div class="custom-file">
+                                                <input name="product_image_2" type="file" class="custom-file-input" id="customFile2">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        @isset ($product)
+                                            <td>Product Image 3</td>
+                                            <td class="text-center"><img src="@isset($imgArr[2]) {{ $imgArr[2] }} @endisset" width="50px" alt="" class="thumb"></td>
+                                        @endisset
+                                        <td>
+                                            <div class="custom-file">
+                                                <input name="product_image_3" type="file" class="custom-file-input" id="customFile3">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        @isset ($product)
+                                            <td>Product Image 4</td>
+                                            <td class="text-center"><img src="@isset($imgArr[3]) {{ $imgArr[3] }} @endisset" width="50px" alt="" class="thumb"></td>
+                                        @endisset
+                                        <td>
+                                            <div class="custom-file">
+                                                <input name="product_image_4" type="file" class="custom-file-input" id="customFile4">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .nk-block -->
+        <div class="nk-block">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="sp-plan-info pt-0 pb-0 card-inner">  
+                            <div class="row">
+                                <div class="col-lg-7 text-right offset-lg-5">
+                                    <div class="form-group">
+                                        <a href="javascript:history.back()" class="btn btn-outline-light">Cancel</a>
+                                        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                    </div><!-- .sp-plan-info -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div>
+    </form>
+    <input type="hidden" name="model_id" id="model_id"  value="{{ isset($product) ? $product->model_id : old('model_id') }}">
+@endsection
+@push('footerScripts')
+<script src="{{url('js/editor/summernote.min.js?ver=1.9.0')}}"></script>
+<script src="{{url('js/editor/editors.js?ver=1.9.0')}}"></script>
+<script type="text/javascript">
+
+   $('#regular_price,#sale_price').keyup(function (event) {
+        var sale_price = $('#sale_price').val();
+        var regular_price = $('#regular_price').val();
+       
+        var discount = ((regular_price - sale_price)*100)/regular_price ;
+
+        $('#discount').val(discount.toFixed(2));
+    });
+
+    var manufacturer = $("#manufacturer").val();
+
+    if(manufacturer != ""){
+        getModels(manufacturer);
+    }
+
+
+    // var model_id = $('#model_id').val();
+    // if(model_id != ""){
+    //     getModels(model_id);
+    // }
+
+function getModels(model_id){
+        var root_url = "<?php echo Request::root(); ?>";
+        //var model_id = $(".model_id").val();
+        var allModels = $("#allModels").val();
+        $.ajax({
+            url: root_url + '/saas/organization/ecommerce/products/manufacturer/get-models/' + model_id,
+            data: {
+            },
+            //dataType: "html",
+            method: "GET",
+            cache: false,
+            success: function (response) {
+                $("#model").html('');
+                $("#model").append($('<option></option>').val('').html('Select Model'));
+              
+                $.each(response.models, function (key, value) {
+                    if(value.id != 0) {
+                        if(allModels.indexOf(value.name) > -1){
+                            $("#model").append($('<option></option>').val(value.id).html(value.name).prop('selected', 'selected'));    
+                        } else {
+                            $("#model").append($('<option></option>').val(value.id).html(value.name));
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+</script>
+
+<script type="text/javascript">
+    function changePage (page) {
+        var root_url = "<?php echo Request::root(); ?>";
+        var goto = root_url + '/user?page='+page;
+        window.location = goto;
+    }
+</script>
+@endpush

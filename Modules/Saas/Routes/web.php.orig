@@ -1,0 +1,45 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::prefix('saas')->group(function() {
+    Route::get('/', 'SaasController@index');
+	    Route::group(['prefix' => 'organization'], function () {
+	        Route::get('/', 'OrganizationController@index');
+	        Route::get('/add', 'OrganizationController@create');
+	        Route::post('/store', 'OrganizationController@store');
+	        Route::post('/update', 'OrganizationController@update');
+	        Route::get('/edit/{id}', 'OrganizationController@edit');
+	        Route::get('/module', 'OrganizationController@module');
+	        Route::get('/industries', 'OrganizationController@industryMaster');
+	        Route::post('/industry/add', 'OrganizationController@addIndustry');
+	        Route::get('/ecommerce/products', 'OrganizationController@product');
+	        Route::get('/ecommerce/products/add', 'OrganizationController@add');
+	        Route::get('/ecommerce/brands', 'OrganizationController@brands');
+	        Route::get('/ecommerce/categories', 'OrganizationController@categories');
+	        Route::get('/modules', 'OrganizationController@modules');
+	        Route::get('/modules/detail', 'OrganizationController@detail');
+	        Route::get('/ecommerce/manufacturer', 'OrganizationController@manufacturer');
+	        Route::get('/ecommerce/models', 'OrganizationController@models');
+	        Route::get('/settings', 'OrganizationController@settings');
+<<<<<<< HEAD
+	        Route::get('/get-setting', 'OrganizationController@getSetting');
+	        Route::post('/settings/add', 'OrganizationController@addSetting');
+	        Route::get('/cities/{id}', 'OrganizationController@getCitiesByState');
+=======
+	        Route::get('/profile', 'OrganizationController@profile');
+	        Route::get('/profile/notification', 'OrganizationController@notification');
+	        Route::get('/profile/activity', 'OrganizationController@activity');
+	        Route::get('/profile/setting', 'OrganizationController@setting');
+>>>>>>> 041fbe36738b94bd04430dbf9d376f0bf75c4119
+	    });
+});

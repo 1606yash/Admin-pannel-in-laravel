@@ -1,0 +1,6 @@
+projectKey=parivaar
+serverUrl=http://localhost:9000
+serverVersion=8.9.1.44547
+dashboardUrl=http://localhost:9000/dashboard?id=parivaar
+ceTaskId=AXqKpBI7pCREWkAxG3Cb
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXqKpBI7pCREWkAxG3Cb
